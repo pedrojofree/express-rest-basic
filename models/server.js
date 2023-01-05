@@ -16,6 +16,7 @@
 
 const express = require('express');
 const cors = require('cors');
+const { dbConnection } = require('../db/config');
 
 class Server { 
 
@@ -24,6 +25,10 @@ class Server {
         this.app = express();
         this.PORT= process.env.PORT;
 
+
+        //Conectar a DB
+        this.connectDB()
+        
         //Middlewares: funciones que se ejecutan siempre.
         this.middlewares()
         
@@ -31,6 +36,10 @@ class Server {
         this.routes()
 
     };
+
+    async connectDB(){
+        await dbConnection();
+    }
 
     middlewares(){
         //Reconocer directorio publico (CSS, HTML)
@@ -53,7 +62,7 @@ class Server {
 
     listen() {
         this.app.listen(this.PORT, () => {
-            console.log(`Listening port ${this.PORT}.`)
+            console.log(`SUCCESS: Port ${this.PORT}.`)
         });
     };
 };

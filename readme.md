@@ -1,7 +1,7 @@
 # REST Server Template - MVC Adapted (2.0.0)
 CRUD ready with many validators between requests.
 
-
+### Usage
 1. Clone the repository.
 2. ```npm install``` to install all the dependencies (CORS, dotenv, express, express-validator, mongoose, bcryptjs).
 3. Create a .env file and specify any "PORT". (If local).

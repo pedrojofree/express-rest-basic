@@ -14,6 +14,7 @@ CRUD ready with many validators between requests.
 + 'api/users' = POST
 + 'api/users/:id' = PUT
 + 'api/users/:id' = DELETE
++ 'api/auth/login = POST
 
 
 This template is part of Fernando Herrera's Node.js course. 

@@ -56,7 +56,9 @@ class Server {
 
         // ##### HOME: es reconocida por el MIDDLEWARE './public' y es el index.html.
 
-        this.app.use('/api/users', require('../routes/usuarios'))
+        this.app.use('/api/users', require('../routes/usuarios')) //Agregando rutas para USUARIOS
+
+        this.app.use('/api/auth', require('../routes/auth')) //Agregando rutas para AUTENTICACION / LOGIN
         
     };
 

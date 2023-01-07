@@ -84,20 +84,12 @@ const usuariosPost = async (req, res) => {
 
 const usuariosDelete = async (req, res) => {
 
-    const {id} = req.params;
-
-    //ELIMINAR FISICAMENTE ( NO APAREZCA EN DB )
-    // const eliminarUsuario = await Usuario.findByIdAndDelete( id )
+    const {id} = req.params; //id desde base de datos para borrar
 
     //MANERA RECOMENDADA, CONSERVANDO POSIBLES RELACIONES CON OTRAS BASES DE DATOS
-    const cambiarEstadoUser = await Usuario.findByIdAndUpdate(id, {estado: false}, {new: true});
+    const usuarioYaInactivo = await Usuario.findByIdAndUpdate(id, {estado: false}, {new: true});
 
-
-    res.json({
-        "msg": "peticion DELETE - desde CONTROLADOR",
-        // eliminarUsuario
-        cambiarEstadoUser
-    })
+    res.json({ usuarioYaInactivo })
 };
 
 

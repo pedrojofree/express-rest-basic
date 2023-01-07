@@ -1,22 +1,23 @@
 /*
+        ##########################################
         Rutas especificas con CRUD de usuarios.
-                Se han separado middlewares de controladores para preservar la logica.
+        Middlewares: Funciones que se ejecutan antes de las peticiones HTTP
+        Controladores: La funcion propia de la peticion. Como borrar, etc
+        Helpers: Funciones ajenas al servidor. Pequeñas ayudas
+        ##########################################
 */
-
 
 const { Router } = require('express'); 
 const { check } = require('express-validator')
 
-
-//Middlewares personalizados
+//Helpers
 const { esRolValido, existeCorreo, existeUsuarioByID } = require('../helpers/db-validators');
-const { validarCampos } = require('../middleware/validate');
 
-//Controladores importados
-const { usuariosGet, 
-        usuariosPut, 
-        usuariosPost, 
-        usuariosDelete } = require('../controllers/usuarios');
+//Middlewares personalizados OPTIMIZADOS 
+const {validarCampos, validarJWT, esAdmin, tieneRole} = require('../middleware')
+
+//Controladores
+const { usuariosGet, usuariosPut, usuariosPost, usuariosDelete } = require('../controllers/usuarios');
 
 const router = Router();
 
@@ -42,6 +43,9 @@ router.post('/', [
 ], usuariosPost);
 
 router.delete('/:id', [
+        validarJWT,
+        // esAdmin,
+        tieneRole( 'ADMIN_ROLE', 'VENTAS_ROLE' ),
         check('id', 'Invalid ID').isMongoId(),
         check('id').custom( (id) => existeUsuarioByID( id ) ),
         validarCampos

@@ -3,7 +3,7 @@ CRUD ready with many validators between requests.
 
 ### Usage
 1. Clone the repository.
-2. ```npm install``` to install all the dependencies (CORS, dotenv, express, express-validator, mongoose, bcryptjs, jsonwebtoken).
+2. ```npm install``` to install all the dependencies (CORS, dotenv, express, express-validator, mongoose, bcryptjs, jsonwebtoken, google-auth-library).
 3. Create a .env file and specify any "PORT". (If local).
 4. ```node or nodemon app.js```
 
@@ -15,6 +15,7 @@ CRUD ready with many validators between requests.
 + 'api/users/:id' = PUT
 + 'api/users/:id' = DELETE
 + 'api/auth/login = POST
++ 'api/auth/google = POST
 
 
 This template is part of Fernando Herrera's Node.js course. 

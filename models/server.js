@@ -60,6 +60,12 @@ class Server {
 
         this.app.use('/api/auth', require('../routes/auth')) //Agregando rutas para AUTENTICACION / LOGIN
         
+        this.app.use('/api/categories', require('../routes/categorias')) //Agregando rutas para CATEGORIAS
+
+        this.app.use('/api/products', require('../routes/productos')) //Agregando rutas para PRODUCTOS
+        
+        this.app.use('/api/search', require('../routes/buscar')) //Agregando rutas para BUSQUEDA
+        
     };
 
     listen() {

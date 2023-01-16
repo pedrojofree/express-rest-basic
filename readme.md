@@ -1,5 +1,5 @@
 # REST Server Template - MVC Adapted (2.0.0)
-CRUD ready with many validators between requests.
+CRUD ready with many validators between requests. Product creation, categories and e-commerce backend template.
 
 ### Usage
 1. Clone the repository.
@@ -16,6 +16,9 @@ CRUD ready with many validators between requests.
 + 'api/users/:id' = DELETE
 + 'api/auth/login = POST
 + 'api/auth/google = POST
++ '/api/categories/:id' = CRUD for categories
++ '/api/products/:id' = CRUD for products
++ '/api/search/:collection/:term' = flexible search, search anything from the database
 
 
 This template is part of Fernando Herrera's Node.js course. 

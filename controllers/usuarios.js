@@ -15,24 +15,20 @@ const usuariosGet = async (req, res) => {
     const { limite=5, desde=0 } = req.query //Recibiendo parametros por URL para limitar los usuarios devueltos.
     const filtro = { estado: true }
 
-    // const usuarios = await Usuario.find(filtro) METODO LENTO
-    //     .skip( Number(desde) )
-    //     .limit( Number(limite) );
+    const usuarios = await Usuario.find(filtro) //METODO LENTO
+        .skip( Number(desde) )
+        .limit( Number(limite) );
 
-    // const registrosTotales = await Usuario.countDocuments(filtro);
+    const registrosTotales = await Usuario.countDocuments(filtro);
 
-    const [registrosTotales, usuarios] = await Promise.all([ //METODO RAPIDO con DESESTRUCTURACIÓN DE ARRAY
-        await Usuario.countDocuments(filtro), //Valor 0 de array
-        await Usuario.find(filtro) 
-            .skip( Number(desde) )
-            .limit( Number(limite) ) //Valor 1 de array
-    ]);
+    // const [registrosTotales, usuarios] = await Promise.all([ //METODO RAPIDO con DESESTRUCTURACIÓN DE ARRAY
+    //     await Usuario.countDocuments(filtro), //Valor 0 de array
+    //     await Usuario.find(filtro) 
+    //         .skip( Number(desde) )
+    //         .limit( Number(limite) ) //Valor 1 de array
+    // ]);
 
-    res.json({
-        "msg": "peticion GET a mi API - desde CONTROLADOR",
-        registrosTotales,
-        usuarios
-    })
+    res.json( registrosTotales,usuarios )
 };
 
 const usuariosPut = async (req, res) => { //IMPORTANTE!: en las RUTAS hay que indicar que se recibe info por URL. (/:id)
@@ -51,10 +47,7 @@ const usuariosPut = async (req, res) => { //IMPORTANTE!: en las RUTAS hay que in
     const usuario = await Usuario.findByIdAndUpdate(id, resto, {new: true} );
 
 
-    res.json({
-        "msg": "peticion PUT - desde CONTROLADOR",
-        usuario
-    })
+    res.json(usuario)
 };
 
 const usuariosPost = async (req, res) => {
@@ -76,10 +69,7 @@ const usuariosPost = async (req, res) => {
     //Guardar
     await usuario.save();
 
-    res.json({
-        "msg": "peticion POST - desde CONTROLADOR",
-        usuario
-    });
+    res.json(usuario);
 };
 
 const usuariosDelete = async (req, res) => {
@@ -89,7 +79,7 @@ const usuariosDelete = async (req, res) => {
     //MANERA RECOMENDADA, CONSERVANDO POSIBLES RELACIONES CON OTRAS BASES DE DATOS
     const usuarioYaInactivo = await Usuario.findByIdAndUpdate(id, {estado: false}, {new: true});
 
-    res.json({ usuarioYaInactivo })
+    res.json( usuarioYaInactivo  )
 };
 
 

@@ -8,15 +8,10 @@
 
 
 
-
-
-
-
-
-
 const express = require('express');
 const cors = require('cors');
 const { dbConnection } = require('../db/config');
+const fileUpload = require('express-fileupload');
 
 class Server { 
 
@@ -50,6 +45,12 @@ class Server {
         
         //CORS
         this.app.use( cors() );
+
+        //FILE UPLOAD - Carga de archivos para todas las rutas en mi servidor.
+        this.app.use(fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/'
+        }));
     };
 
     routes() {
@@ -65,6 +66,8 @@ class Server {
         this.app.use('/api/products', require('../routes/productos')) //Agregando rutas para PRODUCTOS
         
         this.app.use('/api/search', require('../routes/buscar')) //Agregando rutas para BUSQUEDA
+
+        this.app.use('/api/upload', require('../routes/upload')) //Agregando rutas para ARCHIVOS
         
     };
 

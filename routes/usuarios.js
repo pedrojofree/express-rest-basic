@@ -24,7 +24,7 @@ const router = Router();
 router.get('/', usuariosGet);
 
 router.put('/:id', [
-        check('id', 'Invalid ID').isMongoId(),
+        check('id', 'Invalid MongoID').isMongoId(),
         check('id').custom( (id) => existeUsuarioByID( id ) ),
         check('rol').custom( (rol) => esRolValido( rol )),
         validarCampos

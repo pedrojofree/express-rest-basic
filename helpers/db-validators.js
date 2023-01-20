@@ -23,7 +23,7 @@ const existeUsuarioByID = async (id = '') => {
     try {
         const existe = await Usuario.findById( id );
     } catch (error) {
-        throw new Error(`ID "${id}" do not match to any product.`)
+        throw new Error(`ID "${id}" do not match to any user.`)
     }
 };
 
@@ -31,7 +31,7 @@ const existeCategoria = async (id = '') => {
     try {
         const existe = await Categoria.findById( id );
     } catch (error) {
-        throw new Error(`ID "${id}" do not match to any product.`)
+        throw new Error(`ID "${id}" do not match to any category.`)
     }
 };
 
@@ -41,8 +41,15 @@ const existeProducto = async ( id = '' ) => {
     } catch (error) {
         throw new Error(`ID "${id}" do not match to any product.`)
     }
-    
-
 }
 
-module.exports = {esRolValido, existeCorreo, existeUsuarioByID, existeCategoria, existeProducto}
+const isCollectionAvailable = async ( collection = '', collections = []) => {
+    const incluida = collections.includes((collection));
+    if (!incluida) {
+        throw new Error(`'${collection}' is not a db collection. Allowed: ${collections}`);
+    }
+
+    return true;
+};
+
+module.exports = {esRolValido, existeCorreo, existeUsuarioByID, existeCategoria, existeProducto, isCollectionAvailable}

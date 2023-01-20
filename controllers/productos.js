@@ -1,12 +1,5 @@
 const { response } = require("express");
-
-
 const Producto = require("../models/producto");
-
-
-
-
-
 
 
 //Obtener todos los productos - path publico
@@ -95,15 +88,6 @@ const deleteProducto = async (req, res = response) => {
     });
 
 };
-
-
-
-
-
-
-
-
-
 
 module.exports = {
     obtenerProductos, crearProducto, obtenerProductoByID, actualizarProducto, deleteProducto

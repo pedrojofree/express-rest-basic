@@ -21,7 +21,7 @@ class Server {
         this.PORT= process.env.PORT;
 
 
-        //Conectar a DB
+        //Conectar a DBs
         this.connectDB()
         
         //Middlewares: funciones que se ejecutan siempre.
@@ -36,6 +36,7 @@ class Server {
         await dbConnection();
     }
 
+
     middlewares(){
         //Reconocer directorio publico (CSS, HTML)
         this.app.use( express.static('public') );
@@ -49,7 +50,8 @@ class Server {
         //FILE UPLOAD - Carga de archivos para todas las rutas en mi servidor.
         this.app.use(fileUpload({
             useTempFiles : true,
-            tempFileDir : '/tmp/'
+            tempFileDir : '/tmp/',
+            createParentPath: true
         }));
     };
 

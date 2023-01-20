@@ -1,1 +1,2 @@
-### Sent files though POST request will be stored here.
+### This foldes is meant to be used if Cloudinary is not available. Uses Path and File System to create, name, and delete physical files. 
++ Remember to uncomment ```actualizarImagen``` from ```/controllers/upload``` and ```routes/upload```.

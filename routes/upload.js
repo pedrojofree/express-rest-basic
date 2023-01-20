@@ -6,13 +6,28 @@
 
 const { Router } = require('express'); 
 const { check } = require('express-validator');
-const { cargarArchivo } = require('../controllers/upload');
-const { validarCampos } = require('../middleware/validate');
+const { cargarArchivo, actualizarImagen, mostrarImagen, actualizarImagenCloudinary } = require('../controllers/upload');
+const { isCollectionAvailable } = require('../helpers');
+const { validarArchivoSubir, validarCampos } = require('../middleware');
 
 
 const router = Router();
 
-router.post('/', cargarArchivo)
+router.get('/:collection/:id', [
+        check('id', 'Not a MongoID').isMongoId(),
+        check('collection').custom( c => isCollectionAvailable( c, ['users', 'products'])),
+        validarCampos
+], mostrarImagen)
+
+router.post('/', validarArchivoSubir, cargarArchivo)
+
+router.put('/:collection/:id', [
+        validarArchivoSubir,
+        check('id', 'Not a MongoID').isMongoId(),
+        check('collection').custom( c => isCollectionAvailable( c, ['users', 'products'])),
+        validarCampos
+// ],actualizarImagen)
+],actualizarImagenCloudinary)
 
 
 

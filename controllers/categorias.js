@@ -5,13 +5,13 @@ const { Categoria } = require('../models')
 //obtenerCategorias (paginado - limite - populate)
 const obtenerCategorias = async (req, res = response) => {
 
-    const { limite=5, desde=0 } = req.query //Recibiendo filtros por URL
+    const { limit=5, from=0 } = req.query //Recibiendo filtros por URL
     const filtrosDB = {estado: true};
 
 
     const categorias = await Categoria.find(filtrosDB) //METODO LENTO
-    .skip( Number(desde) )
-    .limit( Number(limite) )
+    .skip( Number(from) )
+    .limit( Number(limit) )
     .populate( 'usuario', 'nombre')
 
     const registrosTotales = await Categoria.countDocuments(filtrosDB);
@@ -22,7 +22,6 @@ const obtenerCategorias = async (req, res = response) => {
     })
 };
 
-
 //obtenerCategoria (por id - populate) return object {}
 const obtenerCategoria = async (req, res = response) => {
     const { id } = req.params;
@@ -32,6 +31,7 @@ const obtenerCategoria = async (req, res = response) => {
     res.json(categoriaDB);
 };
 
+//Crear una Categoria - privada solo para token validos
 const crearCategoria = async (req, res = response) => {
     const nombre = req.body.nombre.toUpperCase()
     const existeCategoria = await Categoria.findOne( {nombre} );

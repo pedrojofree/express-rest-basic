@@ -28,7 +28,7 @@ const usuariosGet = async (req, res) => {
     //         .limit( Number(limite) ) //Valor 1 de array
     // ]);
 
-    res.json( registrosTotales,usuarios )
+    res.json( {registrosTotales,usuarios} )
 };
 
 const usuariosPut = async (req, res) => { //IMPORTANTE!: en las RUTAS hay que indicar que se recibe info por URL. (/:id)

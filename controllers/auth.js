@@ -1,6 +1,9 @@
 const { response } = require("express");
+
 const Usuario = require("../models/usuario");
+
 const brcrypt = require('bcryptjs');
+
 const { generarJWT } = require("../helpers/generarJWT");
 const { googleVerify } = require("../helpers/google-verify");
 
@@ -48,7 +51,6 @@ const login = async (req, res = response) => {
         });
     };
 };
-
 
 const googleSignIn = async(req, res = response) => {
 

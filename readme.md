@@ -20,18 +20,24 @@ CRUD ready with many validators between requests. Product, Categories and User c
     + ```GET``` It allows 2 queries from URL: ```limit``` and ```from```. It returs a JSON according to previous queries.
 
     + ```POST``` Create a new user in DB with this body. Password will be encrypted with ```bcryptjs```.
+    ```
             {
                 "nombre": "test",
                 "correo": "test@test.com",
                 "password": "123456",
                 "rol": "USER_ROLE"
             }
+    ```
     + ```PUT``` Update User given in URL ```http://localhost:PORT/api/users/${MONGOID}```.
+    ```
             {
                 "any": "any",
             }
+    ```
     + ```DELETE``` Changes user ```estado``` instead of deleting physically with given MongoID.
+    ```
             http://localhost:PORT/api/users/${MONGOID}
+    ```
 
 #### Categories
 + ```http://localhost:PORT/api/categories ```
@@ -39,41 +45,54 @@ CRUD ready with many validators between requests. Product, Categories and User c
     + ```GET``` Also allows GET request to a specific MongoID given by url```http://localhost:PORT/api/categories/${MONGOID}```.
 
     + ```POST``` Create a new Category in DB with this body. ```nombre``` will be upper cased.
+    ```
             {
                 "nombre": "Food"
             }
+    ```
     + ```PUT``` Update Category gived in URL ```http://localhost:PORT/api/categories/${MONGOID}```.
+    ```
             {
                 "any": "any",
             }
+    ```
     + ```DELETE``` Changes Category ```estado``` instead of deleting physically with given MongoID.
+    ```
             http://localhost:PORT/api/categories/${MONGOID}
-
+    ```
 #### Products 
 + ```http://localhost:PORT/api/products ```
     + ```GET``` It allows 2 queries from URL: ```limit``` and ```from```. It returs a JSON according to previous queries.
     + ```GET``` Also allows GET request to a specific MongoID given by url```http://localhost:PORT/api/products/${MONGOID}```.
 
     + ```POST``` Create a new Product in DB with this body.
+    ```
             {
                 "nombre": "Hamburguer w/ Cheese",
                 "categoria": MongoID Category
             }
+    ```
     + ```PUT``` Update Product gived in URL ```http://localhost:PORT/api/products/${MONGOID}```.
+    ```
             {
                 "any": "any",
             }
+    ```
     + ```DELETE``` Changes Products ```estado``` instead of deleting physically with given MongoID.
+        ```
             http://localhost:PORT/api/categories/${MONGOID}
+        ```
 
 #### Search, IMG update and Cloudinary requests
 + ```http://localhost:PORT/${collection}/${id} ```
     + ```GET```Flexible search, search anything from the database and will return every match. Is case insensitive.
+        ```
             http://localhost:PORT/users/peter
+        ```
 
-+ ```http://localhost:PORT/api/upload/${collection}/${MONGOID}``` 
++ ``` http://localhost:PORT/api/upload/${collection}/${MONGOID} ``` 
     + ```GET``` Returns ```img``` from the specified user/product with the given MONGOID. Returns a placeholder if there is no ```img``` available.
-+ ```http://localhost:PORT/api/upload/${collection}/${MONGOID}``` 
++ ``` http://localhost:PORT/api/upload/${collection}/${MONGOID} ``` 
     + ```PUT``` Updates ```img``` property of the user/product specified in MONGOID using ```req.files``` (express-fileupload module).
         + It also Upload the ```img``` to Cloudinary and keep track of it. If the ```img``` of any user/product changes, the previous one will be deleted from Cloudinay and the new one will replace it.
 
